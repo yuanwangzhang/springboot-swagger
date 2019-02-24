@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds" debug="false">
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <!-- log files path -->
+    <springProperty scope="context" name="log.path" source="logging.folderPath"/>
+    <!-- logfile -->
+    <appender name="LOGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/info.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}-[%-5p]|%X{logId}|%-40.40logger{39}: %m%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/backup-info.%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
+            <maxFileSize>60MB</maxFileSize>
+            <maxHistory>31</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="com.lance.common.config.logback.LogBackInfoFilter"/>
+    </appender>
+    <!-- warn -->
+    <appender name="WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/warn.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}-[%-5p]|%X{logId}|%-40.40logger{39}: %m%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/backup-warn.%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
+            <maxFileSize>60MB</maxFileSize>
+            <maxHistory>31</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="com.lance.common.config.logback.LogBackWarnFilter"/>
+    </appender>
+    <!-- error -->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/error.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}-[%-5p]|%X{logId}|%-40.40logger{39}: %m%n</pattern>
+            <charset>utf-8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/backup-error.%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
+            <maxFileSize>60MB</maxFileSize>
+            <maxHistory>31</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+        <filter class="com.lance.common.config.logback.LogBackErrFilter"/>
+    </appender>
+
+    <!-- global log level -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="LOGFILE"/>
+        <appender-ref ref="WARN"/>
+        <appender-ref ref="ERROR"/>
+    </root>
+    <logger name="org.springframework" level="WARN"/>
+</configuration>

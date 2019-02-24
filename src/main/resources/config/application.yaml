@@ -1,0 +1,28 @@
+# 项目名
+server:
+  servlet:
+    context-path: /httpDataApi
+    application-display-name: httpDataApi
+# spring配置
+spring:
+  profiles:
+    active: dev
+  main:
+    banner-mode: console
+  output:
+    ansi:
+      enabled: detect
+# http配置，编码格式utf-8 HttpMessageConverter换为 Gson 速度稍慢但是稳定
+  http:
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
+    converters:
+      preferred-json-mapper: gson
+  gson:
+    date-format: yyyy-MM-dd HH:mm:ss
+# logging config
+logging:
+  register-shutdown-hook: true
+  folderPath: /logGroup/httpDataApiLog/
