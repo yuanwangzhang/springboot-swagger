@@ -3,3 +3,5 @@
 使用springboot搭建
 包含：基础的业务接口
      线程池，自定义注解校验，自定义简单缓存，aop校验，自定义日志输出，springjdbc+jpa封装，sql格式化等
+模块介绍：
+     https://blog.csdn.net/sinat_30637097/article/details/87920779
